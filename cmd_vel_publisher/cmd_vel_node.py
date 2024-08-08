@@ -24,9 +24,9 @@ class CmdVelPublisher(Node):
         self.angular_z = float(msg.axes[3])
     def timer_callback(self):
         msg = Twist()
-        msg.linear.x = self.linear_x
-        msg.linear.y = self.linear_y
-        msg.angular.z = self.angular_z
+        msg.linear[0] = self.linear_x
+        msg.linear[1] = self.linear_y
+        msg.angular[2] = self.angular_z
         self.publisher_.publish(msg)
         self.get_logger().info(
         'cmd_vel:\n'
@@ -34,7 +34,7 @@ class CmdVelPublisher(Node):
         '   x:"%s"\n'
         '   y:"%s"\n'
         '  angular:\n'
-        '   z: "%s"' % (msg.linear.x, msg.linear.y, msg.angular.z)
+        '   z: "%s"' % (msg.linear[0], msg.linear[1], msg.angular[2])
     )
 def main(args=None):
     rclpy.init(args=args)
